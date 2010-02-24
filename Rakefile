@@ -11,6 +11,8 @@ begin
     gem.email = "brad@wesabe.com"
     gem.homepage = "http://github.com/wesabe/grendel-ruby"
     gem.authors = ["Brad Greenlee"]
+    gem.add_dependency "json"
+    gem.add_dependency "httparty"
     gem.add_development_dependency "rspec", ">= 1.2.9"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
