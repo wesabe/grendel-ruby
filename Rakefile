@@ -6,9 +6,10 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = "grendel-ruby"
     gem.summary = %Q{Ruby interface to Wesabe's Grendel}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.description = %Q{Grendel is a RESTful web service which allows for the secure storage of users'
+    documents. Grendel-Ruby provides a Ruby API for Grendel.}
     gem.email = "brad@wesabe.com"
-    gem.homepage = "http://github.com/bgreenlee/grendel-ruby"
+    gem.homepage = "http://github.com/wesabe/grendel-ruby"
     gem.authors = ["Brad Greenlee"]
     gem.add_development_dependency "rspec", ">= 1.2.9"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
