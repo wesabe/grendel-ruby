@@ -6,13 +6,7 @@ Ruby interface to the Grendel secure document storage service (http://github.com
 Installation
 ------------
 
-If you haven't already added the github gem repository:
-
-    gem sources -a http://gems.github.com
-
-then:
-
-    gem install wesabe-grendel-ruby
+    sudo gem install grendel-ruby
 
 Examples
 --------
