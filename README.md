@@ -41,10 +41,10 @@ If the user `id` is taken, a `Grendel::HTTPException` will be thrown with a mess
 
 The returned `Grendel::User` will contain the following attributes:
 
-    id - user id
-    modified_at - DateTime
-    created_at - DateTime
-    keys - array of key fingerprints
+    - id  # user id
+    - modified_at  # DateTime
+    - created_at  # DateTime
+    - keys  # array of key fingerprints
     
 If the user is not found, a `Grendel::HTTPException` will be thrown with a message containing `404 Not Found`
 
@@ -154,7 +154,7 @@ user's linked documents.
 
 
     user = client.users.find("alice", "s3kret")
-    linked_docs = user.linked_documents  # returns an array of Grende::LinkedDocuments
+    linked_docs = user.linked_documents  # returns an array of Grendel::LinkedDocuments
     
 A `Grendel::LinkedDocument` is a subclass of `Grendel::Document` with the following additional attribute:
 
