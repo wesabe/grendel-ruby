@@ -1,7 +1,7 @@
 grendel-ruby
 ============
 
-Ruby interface to the Grendel secure document storage service (http://github.com/wesabe/grendel). See the Grendel API documentation (http://github.com/wesabe/grendel/blob/master/API.md) for more information.
+Ruby interface to the [Grendel secure document storage service](http://github.com/wesabe/grendel). See the [Grendel API documentation](http://github.com/wesabe/grendel/blob/master/API.md) for more information.
 
 Installation
 ------------
