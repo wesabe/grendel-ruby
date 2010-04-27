@@ -1,6 +1,14 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 
+begin
+  require 'bundler'
+rescue LoadError
+  require 'rubygems'
+  require 'bundler'
+end
+Bundler.setup
+
 require 'grendel'
 require 'spec'
 require 'spec/autorun'
@@ -10,7 +18,7 @@ include WebMock
 
 Spec::Runner.configure do |config|
   WebMock.disable_net_connect!
-  
+
   # helper to add Content-Type: application/json to each request
   def stub_json_request(method, uri, body, headers = {})
     headers = headers.update("Content-Type" => "application/json")

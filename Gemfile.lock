@@ -1,0 +1,59 @@
+--- 
+dependencies: 
+  ruby-debug: 
+    group: 
+    - :test
+    version: ">= 0"
+  httparty: 
+    group: 
+    - :default
+    version: ">= 0"
+  mime-types: 
+    group: 
+    - :default
+    version: ">= 0"
+  rspec: 
+    group: 
+    - :test
+    version: ">= 1.2.9"
+  json: 
+    group: 
+    - :default
+    version: ">= 0"
+  bundler: 
+    group: 
+    - :development
+    version: ">= 0.9.20"
+  webmock: 
+    group: 
+    - :test
+    version: ">= 0"
+specs: 
+- addressable: 
+    version: 2.1.2
+- bundler: 
+    version: 0.9.24
+- columnize: 
+    version: 0.3.1
+- crack: 
+    version: 0.1.6
+- httparty: 
+    version: 0.5.2
+- json: 
+    version: 1.4.1
+- linecache: 
+    version: "0.43"
+- mime-types: 
+    version: "1.16"
+- rspec: 
+    version: 1.3.0
+- ruby-debug-base: 
+    version: 0.10.3
+- ruby-debug: 
+    version: 0.10.3
+- webmock: 
+    version: 1.0.0
+hash: ba591b03680c95446b835ca0f00273517b491c6d
+sources: 
+- Rubygems: 
+    uri: http://gemcutter.org

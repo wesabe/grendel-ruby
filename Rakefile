@@ -2,6 +2,12 @@ require 'rubygems'
 require 'rake'
 
 begin
+  require 'bundler'
+rescue LoadError
+  puts "Bundler is not available. Install it with: gem install bundler"
+end
+
+begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "grendel-ruby"
@@ -11,9 +17,11 @@ begin
     gem.email = "brad@wesabe.com"
     gem.homepage = "http://github.com/wesabe/grendel-ruby"
     gem.authors = ["Brad Greenlee"]
-    gem.add_dependency "json"
-    gem.add_dependency "httparty"
-    gem.add_development_dependency "rspec", ">= 1.2.9"
+
+    Bundler::Definition.from_gemfile('Gemfile').dependencies.each do |dependency|
+      next unless dependency.groups.include?(:default)
+      gem.add_dependency dependency.name, dependency.requirement
+    end
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
