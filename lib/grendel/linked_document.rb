@@ -1,7 +1,7 @@
 module Grendel
   class LinkedDocument < Document
     attr_accessor :linked_user, :owner
-    
+
     # create a new linked document
     # user - linked user
     # params:
@@ -17,11 +17,11 @@ module Grendel
       super(@owner, params)
       @linked_user = linked_user
       @name = params[:name]
-      @uri = params[:uri] ? 
+      @uri = params[:uri] ?
         URI.parse(params[:uri]).path :
         ["/linked-documents", @owner.id, name].join("/")
     end
-    
+
     # delete this linked document
     def delete
       @linked_user.delete(@uri)

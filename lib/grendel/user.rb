@@ -2,7 +2,7 @@ module Grendel
   class User
     attr_accessor :id, :password, :uri
     attr_reader :client, :modified_at, :created_at, :keys
-    
+
     # create a new Grendel::User object
     # params:
     #  id
@@ -12,7 +12,7 @@ module Grendel
       params.symbolize_keys!
       @client = client
       @id = params[:id]
-      @uri = params[:uri] ? 
+      @uri = params[:uri] ?
         URI.parse(params[:uri]).path :
         "/users/" + @id # escape this?
       @password = params[:password]
@@ -33,12 +33,12 @@ module Grendel
       options.merge!(auth)
       @client.get(@uri + uri, options)
     end
-    
+
     def post(uri = "", data = {}, options = {})
       options.merge!(auth)
       @client.post(@uri + uri, data, options)
     end
-    
+
     def put(uri = "", data = {}, options = {})
       options.merge!(auth)
       @client.put(@uri + uri, data, options)
@@ -48,18 +48,18 @@ module Grendel
       options.merge!(auth)
       @client.delete(@uri + uri, options)
     end
-    
+
     # change the user's password
     def change_password(new_password)
       put("", {:password => new_password})
       @password = new_password
     end
-    
+
     # send documents calls to the DocumentManager
     def documents
       DocumentManager.new(self)
     end
-    
+
     # send linked documents calls to the LinkedDocumentManager
     def linked_documents
       LinkedDocumentManager.new(self)

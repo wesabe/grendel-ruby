@@ -37,11 +37,11 @@ describe "Grendel::LinkedDocumentManager" do
               "uri": "http://grendel/users/carol"
             }
           }
-          
+
         ]
       }})
     end
-    
+
     it "should return an array of all linked documents" do
       docs = @user.linked_documents.list
       docs.length.should == 2
@@ -55,13 +55,13 @@ describe "Grendel::LinkedDocumentManager" do
       docs[1].owner.uri.should == "/users/carol"
     end
   end
-  
+
   describe "find" do
     before do
       stub_json_request(:get, @base_uri + "/bob/document1.txt", "yay for me", :content_type => "text/plain")
-      stub_json_request(:get, @base_uri + "/carol/notfound.txt", "", :status => "404 Not Found")
+      stub_json_request(:get, @base_uri + "/carol/notfound.txt", "", :status => [404, "Not Found"])
     end
-    
+
     it "should return the document" do
       doc = @user.linked_documents.find("bob", "document1.txt")
       doc.name.should == "document1.txt"
@@ -69,17 +69,17 @@ describe "Grendel::LinkedDocumentManager" do
       doc.data.should == "yay for me"
       doc.owner.id.should == "bob"
     end
-    
+
     it "should raise an exception if the document is not found" do
       lambda {
         @user.linked_documents.find("carol", "notfound.txt")
-      }.should raise_error(Grendel::Client::HTTPException) {|error| error.message.should match("404")} # change to should == "404 Not Found" once WebMock supports status messages
+      }.should raise_error(Grendel::Client::HTTPException) {|error| error.message.should == "404 Not Found"}
     end
   end
-  
+
   describe "delete" do
     before do
-      stub_json_request(:delete, @base_uri + "/bob/document.txt", "", :status => "204 No Content")
+      stub_json_request(:delete, @base_uri + "/bob/document.txt", "", :status => [204, "No Content"])
       @linked_document = Grendel::LinkedDocument.new(@user, :name => "document.txt", :owner => {:id => "bob"})
     end
 

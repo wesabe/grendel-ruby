@@ -11,7 +11,7 @@ describe "Grendel::LinkedDocument" do
 
   describe "delete" do
     before do
-      stub_json_request(:delete, @base_uri + "/bob/document.txt", "", :status => "204 No Content")
+      stub_json_request(:delete, @base_uri + "/bob/document.txt", "", :status => [204, "No Content"])
       @linked_document = Grendel::LinkedDocument.new(@user, :name => "document.txt", :owner => {:id => "bob"})
     end
 

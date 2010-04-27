@@ -11,7 +11,7 @@ describe "Grendel::Document" do
 
   describe "delete" do
     before do
-      stub_json_request(:delete, @base_uri + "/document.txt", "", :status => "204 No Content")
+      stub_json_request(:delete, @base_uri + "/document.txt", "", :status => [204, "No Content"])
       @document = Grendel::Document.new(@user, :name => "document.txt")
     end
 

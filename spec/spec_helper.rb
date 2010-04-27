@@ -22,7 +22,7 @@ Spec::Runner.configure do |config|
   # helper to add Content-Type: application/json to each request
   def stub_json_request(method, uri, body, headers = {})
     headers = headers.update("Content-Type" => "application/json")
-    status = headers.delete(:status) || "200 OK"
+    status = headers.delete(:status) || 200
     stub_request(method, uri).
       to_return(:body => body, :status => status, :headers => headers)
   end
