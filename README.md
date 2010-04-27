@@ -11,7 +11,7 @@ Installation
 Examples
 --------
 
-The following examples assumes that you have the Grendel server running locally on port 8080.
+The following examples assume that you have the Grendel server running locally on port 8080.
 
 
 ### Establishing a Connection
@@ -28,7 +28,7 @@ The following examples assumes that you have the Grendel server running locally 
 
     user = client.users.create("alice", "s3kret")  # returns a Grendel::User with id "alice" and password "s3kret"
     
-If the user `id` is taken, a `Grendel::HTTPException` will be thrown with a message containing `422 Unprocessable Entity` and an explanation.
+If the user `id` is taken, a `Grendel::Client::HTTPException` will be thrown with a message containing `422 Unprocessable Entity` and an explanation.
 
 
 ### Viewing A User
@@ -46,7 +46,7 @@ The returned `Grendel::User` will contain the following attributes:
     - created_at  # DateTime
     - keys  # array of key fingerprints
     
-If the user is not found, a `Grendel::HTTPException` will be thrown with a message containing `404 Not Found`
+If the user is not found, a `Grendel::Client::HTTPException` will be thrown with a message containing `404 Not Found`
 
 
 ### Changing A User's Password
