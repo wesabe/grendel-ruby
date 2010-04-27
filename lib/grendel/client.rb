@@ -18,6 +18,13 @@ module Grendel
       return response
     end
 
+    def head(uri, options = {})
+      options.merge!(:debug_output => @debug_output) if @debug
+      response = HTTParty.head(@base_uri + uri, options)
+      raise HTTPException.new(response) if response.code >= 400
+      return response
+    end
+
     def post(uri, data = {}, options = {})
       data = data.to_json unless options.delete(:raw_data)
       options.merge!(

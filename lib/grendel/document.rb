@@ -23,5 +23,19 @@ module Grendel
     def links
       LinkManager.new(self)
     end
+
+    def content_type
+      @content_type ||= begin
+        @user.head(@uri).headers['content-type'].first
+      end
+    end
+
+    def data
+      @data ||= begin
+        response = @user.get(@uri)
+        @content_type = response.headers['content-type'].first
+        response.body
+      end
+    end
   end
 end

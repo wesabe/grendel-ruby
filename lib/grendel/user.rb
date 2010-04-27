@@ -31,22 +31,27 @@ module Grendel
     #
     def get(uri = "", options = {})
       options.merge!(auth)
-      @client.get(@uri + uri, options)
+      @client.get(child_uri(uri), options)
+    end
+
+    def head(uri = "", options = {})
+      options.merge!(auth)
+      @client.head(child_uri(uri), options)
     end
 
     def post(uri = "", data = {}, options = {})
       options.merge!(auth)
-      @client.post(@uri + uri, data, options)
+      @client.post(child_uri(uri), data, options)
     end
 
     def put(uri = "", data = {}, options = {})
       options.merge!(auth)
-      @client.put(@uri + uri, data, options)
+      @client.put(child_uri(uri), data, options)
     end
 
     def delete(uri = "", options = {})
       options.merge!(auth)
-      @client.delete(@uri + uri, options)
+      @client.delete(child_uri(uri), options)
     end
 
     # change the user's password
@@ -64,5 +69,19 @@ module Grendel
     def linked_documents
       LinkedDocumentManager.new(self)
     end
+
+    private
+      def child_uri(uri)
+        if uri.nil? || uri.empty?
+          # blank uri, just use the user's uri
+          @uri
+        elsif uri.index(@uri) == 0
+          # uri already starts with user's uri, just leave it alone
+          uri
+        else
+          # otherwise just tack the uri onto the end of the user's uri
+          @uri + uri
+        end
+      end
   end
 end
