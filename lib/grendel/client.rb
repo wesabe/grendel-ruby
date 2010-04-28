@@ -12,52 +12,49 @@ module Grendel
     end
 
     def get(uri, options = {})
-      options.merge!(:debug_output => @debug_output) if @debug
-      response = HTTParty.get(@base_uri + uri, options)
-      raise HTTPException.new(response) if response.code >= 400
-      return response
+      process_response HTTParty.get(@base_uri + uri, process_options(options))
     end
 
     def head(uri, options = {})
-      options.merge!(:debug_output => @debug_output) if @debug
-      response = HTTParty.head(@base_uri + uri, options)
-      raise HTTPException.new(response) if response.code >= 400
-      return response
+      process_response HTTParty.head(@base_uri + uri, process_options(options))
     end
 
     def post(uri, data = {}, options = {})
-      data = data.to_json unless options.delete(:raw_data)
-      options.merge!(
-          :body => data,
-          :headers => {'Content-Type' => 'application/json'}
-      )
-      options.merge!(:debug_output => @debug_output) if @debug
-      response = HTTParty.post(@base_uri + uri, options)
-      raise HTTPException.new(response) if response.code >= 400
-      return response
+      process_response HTTParty.post(@base_uri + uri, process_options(options, data))
     end
 
     def put(uri, data = {}, options = {})
-      data = data.to_json unless options.delete(:raw_data)
-      options = {
-        :body => data,
-        :headers => {'Content-Type' => 'application/json'}
-      }.update(options)
-      options.merge!(:debug_output => @debug_output) if @debug
-      response = HTTParty.put(@base_uri + uri, options)
-      raise HTTPException.new(response) if response.code >= 400
-      return response
+      process_response HTTParty.put(@base_uri + uri, process_options(options, data))
     end
 
     def delete(uri, options = {})
-      options.merge!(:debug_output => @debug_output) if @debug
-      response = HTTParty.delete(@base_uri + uri, options)
-      raise HTTPException.new(response) if response.code >= 400
+      process_response HTTParty.delete(@base_uri + uri, process_options(options))
     end
 
     def users
       UserManager.new(self)
     end
+
+    private
+      def process_response(response)
+        raise HTTPException.new(response) if response.code >= 400
+        return response
+      end
+
+      def process_options(options, data=nil)
+        options = options.dup
+
+        if data
+          data = data.to_json unless options.delete(:raw_data)
+          options[:body] ||= data
+          options[:headers] = (options[:headers] || {}).dup
+          options[:headers]['Content-Type'] ||= 'application/json'
+        end
+
+        options[:debug_output] ||= @debug_output if @debug
+
+        return options
+      end
 
     class HTTPException < Exception
       def initialize(response)
