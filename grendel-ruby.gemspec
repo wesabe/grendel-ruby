@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{grendel-ruby}
-  s.version = "0.1.2"
+  s.version = "0.1.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Brad Greenlee"]
-  s.date = %q{2010-04-27}
+  s.date = %q{2010-04-29}
   s.description = %q{Grendel is a RESTful web service which allows for the secure storage of users'
     documents. Grendel-Ruby provides a Ruby API for Grendel.}
   s.email = %q{brad@wesabe.com}
@@ -28,7 +28,6 @@ Gem::Specification.new do |s|
      "TODO.md",
      "VERSION",
      "grendel-ruby.gemspec",
-     "lib/core_ext/hash.rb",
      "lib/grendel.rb",
      "lib/grendel/client.rb",
      "lib/grendel/document.rb",
@@ -37,6 +36,7 @@ Gem::Specification.new do |s|
      "lib/grendel/link_manager.rb",
      "lib/grendel/linked_document.rb",
      "lib/grendel/linked_document_manager.rb",
+     "lib/grendel/mash.rb",
      "lib/grendel/user.rb",
      "lib/grendel/user_manager.rb",
      "spec/grendel/client_spec.rb",
