@@ -12,7 +12,7 @@ module Grendel
     #   :uri => owner uri
     # }
     def initialize(linked_user, params)
-      params.symbolize_keys!
+      params = Mash.new(params)
       @owner = User.new(linked_user.client, params[:owner])
       super(@owner, params)
       @linked_user = linked_user

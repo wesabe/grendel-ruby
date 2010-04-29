@@ -3,7 +3,7 @@ module Grendel
     attr_accessor :document, :user, :uri
 
     def initialize(document, user, params = {})
-      params.symbolize_keys!
+      params = Mash.new(params)
       @document = document
       @user = user
       @uri = params[:uri] ?

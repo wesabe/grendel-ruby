@@ -3,7 +3,7 @@ module Grendel
     attr_accessor :user, :name, :uri, :data, :content_type
 
     def initialize(user, params)
-      params.symbolize_keys!
+      params = Mash.new(params)
       @user = user
       @client = user.client
       @name = params[:name]

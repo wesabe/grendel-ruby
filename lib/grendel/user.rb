@@ -9,7 +9,7 @@ module Grendel
     #  uri
     #  password
     def initialize(client, params)
-      params.symbolize_keys!
+      params = Mash.new(params)
       @client = client
       @id = params[:id]
       @uri = params[:uri] ?
