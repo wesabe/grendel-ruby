@@ -2,7 +2,6 @@ $:.unshift File.dirname(__FILE__)
 
 require 'rubygems'
 require 'httparty'
-require 'json'
 require 'mime/types'
 require 'grendel/mash'
 require 'grendel/client'

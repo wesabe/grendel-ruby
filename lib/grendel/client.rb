@@ -45,6 +45,7 @@ module Grendel
         options = options.dup
 
         if data
+          require 'json' unless data.respond_to?(:to_json)
           data = data.to_json unless options.delete(:raw_data)
           options[:body] ||= data
           options[:headers] = (options[:headers] || {}).dup
