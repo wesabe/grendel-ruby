@@ -58,7 +58,10 @@ module Grendel
       end
 
     class HTTPException < Exception
+      attr_reader :response
+
       def initialize(response)
+        @response = response
         msg = "#{response.code} #{response.message}"
         msg << "\n#{response.body}" unless response.body.blank?
         super(msg)
