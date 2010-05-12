@@ -21,20 +21,20 @@ The following examples assume that you have the Grendel server running locally o
 
 ### Listing Registered Users
 
-    client.users.list  # returns an array of Grendel::Users    
+    client.users.list  # returns an array of Grendel::Users
 
 
 ### Creating A New User
 
     user = client.users.create("alice", "s3kret")  # returns a Grendel::User with id "alice" and password "s3kret"
-    
+
 If the user `id` is taken, a `Grendel::Client::HTTPException` will be thrown with a message containing `422 Unprocessable Entity` and an explanation.
 
 
 ### Viewing A User
 
     user = client.users.find("alice")  # returns a Grendel::User
-    
+
     # return a Grendel::User with the password set to "s3kret". Note that this is merely a convenience
     # method for future authenticated calls--it does not actually check that the password is correct.
     user = client.users.find("alice", "s3kret")
@@ -45,7 +45,7 @@ The returned `Grendel::User` will contain the following attributes:
     - modified_at  # DateTime
     - created_at  # DateTime
     - keys  # array of key fingerprints
-    
+
 If the user is not found, a `Grendel::Client::HTTPException` will be thrown with a message containing `404 Not Found`
 
 
@@ -53,11 +53,13 @@ If the user is not found, a `Grendel::Client::HTTPException` will be thrown with
 
     user = client.users.find("alice", "s3kret")
     user.change_password("new-pass")
-    
+
 
 ### Deleting A User
 
-    user = client.users.find("alice", "s3kret")
+Deleting a user does not require authentication as of Grendel 0.4.1.
+
+    user = client.users.find("alice")
     user.delete
 
 
@@ -97,9 +99,9 @@ Note that this method will overwrite the document if it already exists in Grende
 
     user = client.users.find("alice", "s3kret")
     doc = user.documents.delete("document1.txt")
-    
+
     # or
-    
+
     doc = user.documents.find("document1.txt")
     doc.delete
 
@@ -115,7 +117,7 @@ provides other users *read-only* access to the document.
     user = client.users.find("alice", "s3kret")
     doc = user.documents.find("document1.txt")
     links = doc.links.list  # returns an array of Grendel::Links
-    
+
 A `Grendel::Link` contains the following attributes:
 
     - document
@@ -155,7 +157,7 @@ user's linked documents.
 
     user = client.users.find("alice", "s3kret")
     linked_docs = user.linked_documents  # returns an array of Grendel::LinkedDocuments
-    
+
 A `Grendel::LinkedDocument` is a subclass of `Grendel::Document` with the following additional attribute:
 
     - owner # the document owner as a Grendel::User
@@ -166,15 +168,15 @@ A `Grendel::LinkedDocument` is a subclass of `Grendel::Document` with the follow
 
     user = client.users.find("alice", "s3kret")
     doc = user.linked_documents.find("bob", "bobs_secrets.txt")
-    
+
 
 ### Deleting A Linked Document
 
     user = client.users.find("alice", "s3kret")
     user.linked_documents.delete("bob", "bobs_secrets.txt")
-    
+
     # or
-    
+
     doc = user.linked_documents.find("bob", "bobs_secrets.txt")
     doc.delete
 
